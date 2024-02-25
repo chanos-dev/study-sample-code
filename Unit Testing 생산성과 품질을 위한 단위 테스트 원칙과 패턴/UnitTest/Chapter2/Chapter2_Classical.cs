@@ -1,4 +1,7 @@
-namespace UnitTest.Chapter2_Classical
+using System.Collections.Generic;
+using Xunit;
+
+namespace UnitTest.Chapter2.Classical
 {
     public class Chapter2_Classical
     {
@@ -6,9 +9,9 @@ namespace UnitTest.Chapter2_Classical
         public void Purchase_succeeds_when_enough_inventory()
         {
             // Arrange
-            Store store = new ();
+            Store store = new Store();
             store.AddInventory(Product.Shampoo, 10);
-            Customer customer = new();
+            Customer customer = new Customer();
 
             // Act
             bool success = customer.Purchase(store, Product.Shampoo, 5);
@@ -22,9 +25,9 @@ namespace UnitTest.Chapter2_Classical
         public void Purchase_fails_when_not_enough_inventory()
         {
             // Arrange
-            Store store = new ();
+            Store store = new Store();
             store.AddInventory(Product.Shampoo, 10);
-            Customer customer = new();
+            Customer customer = new Customer();
 
             // Act
             bool success = customer.Purchase(store, Product.Shampoo, 15);
@@ -41,7 +44,7 @@ namespace UnitTest.Chapter2_Classical
 
         public Store()
         {
-            _inventory = new();
+            _inventory = new Dictionary<Product, int>();
         }
 
         internal void AddInventory(Product shampoo, int v)

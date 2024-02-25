@@ -1,6 +1,8 @@
 using Moq;
+using System.Collections.Generic;
+using Xunit;
 
-namespace UnitTest.Chapter2_London
+namespace UnitTest.Chapter2.London
 {
     public class Chapter2_London
     {
@@ -12,7 +14,7 @@ namespace UnitTest.Chapter2_London
             storeMock.Setup(x => x.HasEnoughInventory(Product.Shampoo, 5))
                 .Returns(true);
 
-            Customer customer = new();
+            Customer customer = new Customer();
 
             // Act
             bool success = customer.Purchase(storeMock.Object, Product.Shampoo, 5);
@@ -30,7 +32,7 @@ namespace UnitTest.Chapter2_London
             storeMock.Setup(x => x.HasEnoughInventory(Product.Shampoo, 5))
                 .Returns(false);
 
-            Customer customer = new();
+            Customer customer = new Customer();
 
             // Act
             bool success = customer.Purchase(storeMock.Object, Product.Shampoo, 5);
@@ -55,7 +57,7 @@ namespace UnitTest.Chapter2_London
 
         public Store()
         {
-            _inventory = new();
+            _inventory = new Dictionary<Product, int>();
         }
 
         public void AddInventory(Product shampoo, int v)
